@@ -3,7 +3,6 @@
 This project is a clean and extensible **Low-Level Design (LLD)** of a multi-floor parking lot system, built in Python using core OOP principles and key software design patterns.
 
 ---
-
 ## ✅ Requirements
 
 The system supports:
@@ -80,6 +79,49 @@ The system supports:
 | Single Responsibility | Each class has one clear, maintainable job                 |
 
 ---
+
+## 📦 Core Functional Flows
+
+### 1️⃣ Vehicle Entry Flow
+
+**Objective:** Allocate an available parking slot to a vehicle and issue a ticket.
+
+**Steps:**
+1. Vehicle object is created (`Car`, `Bike`, etc.)
+2. `ParkingLot.assign_spot(vehicle)` is called.
+3. System checks each floor and slot:
+   - Finds the first available slot matching vehicle type.
+4. Allocates the spot and generates a `Ticket`.
+5. Returns ticket to user.
+
+---
+
+### 2️⃣ Vehicle Exit Flow
+
+**Objective:** Free the slot and calculate fee based on parked time.
+
+**Steps:**
+1. User provides the `Ticket` at exit.
+2. `ParkingLot.release_spot(ticketId)` is triggered.
+3. System:
+   - Retrieves the ticket
+   - Calculates duration using `FeeStrategy`
+   - Frees the slot
+   - Processes payment using `PaymentStrategy`
+   - Returns receipt to user
+
+---
+
+### 3️⃣ Find Available Slot Flow
+
+**Objective:** Return available slots by vehicle type.
+
+**Steps:**
+1. User queries: `ParkingLot.get_available_slots(vehicle_type)`
+2. System loops through all floors and slots.
+3. Filters available slots matching the type.
+4. Returns list of available `ParkingSpot`s
+
 
 ## 🗂️ UML Class Diagram
 
